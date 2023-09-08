@@ -20,11 +20,10 @@ export namespace AVAILABLE_PAGE_TYPE {
     const PAGE: string;
     const POLICY: string;
     const PRODUCT: string;
-    const PRODUCT_REVIEWS: string;
-    const ADD_PRODUCT_REVIEW: string;
     const PRODUCT_REQUEST: string;
     const PRODUCTS: string;
     const PROFILE: string;
+    const PROFILE_ORDER_SHIPMENT: string;
     const PROFILE_BASIC: string;
     const PROFILE_COMPANY: string;
     const PROFILE_EMAILS: string;
@@ -45,6 +44,7 @@ export namespace AVAILABLE_PAGE_TYPE {
     const REGISTER: string;
     const SHIPPING_POLICY: string;
     const RETURN_POLICY: string;
+    const ORDER_STATUS: string;
 }
 export const NAVIGATORS: {
     "about-us": {
@@ -167,22 +167,6 @@ export const NAVIGATORS: {
             required: boolean;
         }[];
     };
-    "product-reviews": {
-        name: string;
-        link: string;
-        params: {
-            key: string;
-            required: boolean;
-        }[];
-    };
-    "add-product-review": {
-        name: string;
-        link: string;
-        params: {
-            key: string;
-            required: boolean;
-        }[];
-    };
     "product-request": {
         name: string;
         link: string;
@@ -194,6 +178,14 @@ export const NAVIGATORS: {
     profile: {
         name: string;
         link: string;
+    };
+    "profile-order-shipment": {
+        name: string;
+        link: string;
+        params: {
+            key: string;
+            required: boolean;
+        }[];
     };
     "profile-basic": {
         name: string;
@@ -288,6 +280,10 @@ export const NAVIGATORS: {
         link: string;
     };
     "return-policy": {
+        name: string;
+        link: string;
+    };
+    "order-status": {
         name: string;
         link: string;
     };

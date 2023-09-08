@@ -2,16 +2,79 @@
 
 
 
+
 ##### [Back to Public docs](./README.md)
 
 ## Configuration Methods
 Application configuration apis
-* [searchApplication](#searchapplication)
+
 * [getLocations](#getlocations)
+* [searchApplication](#searchapplication)
 
 
 
 ## Methods with example and description
+
+
+
+
+### getLocations
+Get countries, states, cities
+
+
+
+```javascript
+// Promise
+const promise = publicClient.configuration.getLocations({  locationType : value,
+ id : value });
+
+// Async/Await
+const data = await publicClient.configuration.getLocations({  locationType : value,
+ id : value });
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |  
+| locationType | string | no | Provide location type to query on. Possible values : country, state, city |    
+| id | string | no | Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state. |  
+
+
+
+
+
+*Returned Response:*
+
+
+
+
+[Locations](#Locations)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
 
 
 ### searchApplication
@@ -21,11 +84,11 @@ Search Application
 
 ```javascript
 // Promise
-const promise = configuration.searchApplication({  authorization : value,
+const promise = publicClient.configuration.searchApplication({  authorization : value,
  query : value });
 
 // Async/Await
-const data = await configuration.searchApplication({  authorization : value,
+const data = await publicClient.configuration.searchApplication({  authorization : value,
  query : value });
 ```
 
@@ -134,312 +197,221 @@ Success
 ---
 
 
-### getLocations
-Get countries, states, cities
-
-
-
-```javascript
-// Promise
-const promise = configuration.getLocations({  locationType : value,
- id : value });
-
-// Async/Await
-const data = await configuration.getLocations({  locationType : value,
- id : value });
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |  
-| locationType | string | no | Provide location type to query on. Possible values : country, state, city |    
-| id | string | no | Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state. |  
-
-
-
-
-
-*Returned Response:*
-
-
-
-
-[Locations](#Locations)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 
 ### Schemas
 
- 
- 
- #### [ApplicationResponse](#ApplicationResponse)
+
+#### [Application](#Application)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | application | [Application](#Application) |  no  |  |
+ | __v | number? |  yes  | Version key for tracking revisions. Default value is zero. |
+ | _id | string? |  yes  | The unique identifier (24-digit Mongo Object ID) of the sales channel |
+ | app_type | string? |  yes  | It shows whether application is live or in development mode |
+ | auth | [ApplicationAuth](#ApplicationAuth)? |  yes  |  |
+ | banner | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | cache_ttl | number? |  yes  | An integer value that specifies the number of seconds until the key expires |
+ | channel_type | string? |  yes  | It indicates different channel types like store, website-and-mobile-apps. Default value is store. |
+ | company_id | number? |  yes  | Numeric ID allotted to a business account where the sales channel exists |
+ | cors | [ApplicationCors](#ApplicationCors)? |  yes  |  |
+ | created_at | string? |  yes  | ISO 8601 timestamp of sales channel creation |
+ | description | string? |  yes  | It contains detailed information about the sales channel |
+ | domain | [Domain](#Domain)? |  yes  |  |
+ | domains | [[Domain](#Domain)]? |  yes  |  |
+ | favicon | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | is_active | boolean? |  yes  | Indicates whether a sales channel is active or not active |
+ | is_internal | boolean? |  yes  | Indicates whether a sales channel is internal or not |
+ | logo | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | meta | [[ApplicationMeta](#ApplicationMeta)]? |  yes  |  |
+ | mobile_logo | [SecureUrl](#SecureUrl)? |  yes  |  |
+ | name | string? |  yes  | Name of the sales channel, e.g. Zenz Fashion |
+ | owner | string? |  yes  | The unique identifier (24-digit Mongo Object ID) of owner who owns the application |
+ | redirections | [[ApplicationRedirections](#ApplicationRedirections)]? |  yes  |  |
+ | token | string? |  yes  | Randomly generated fixed-length string for sales channel. It is required and auto-generated. |
+ | updated_at | string? |  yes  | ISO 8601 timestamp of sales channel updation |
+ | website | [ApplicationWebsite](#ApplicationWebsite)? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [Currency](#Currency)
+#### [ApplicationAuth](#ApplicationAuth)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | _id | string |  no  |  |
- | is_active | boolean |  no  |  |
- | name | string |  no  |  |
- | code | string |  no  |  |
- | created_at | string |  no  |  |
- | updated_at | string |  no  |  |
- | decimal_digits | number |  no  |  |
- | symbol | string |  no  |  |
+ | enabled | boolean? |  yes  | Shows sales channel auth is enabled or not enabled. |
+ 
 
 ---
 
-
- 
- 
- #### [Domain](#Domain)
+#### [ApplicationCors](#ApplicationCors)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | verified | boolean |  no  |  |
- | is_primary | boolean |  no  |  |
- | is_shortlink | boolean |  no  |  |
- | _id | string |  no  |  |
- | name | string |  no  |  |
- | is_predefined | boolean |  no  | Domain is hosting domain or not. |
+ | domains | [string]? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [ApplicationWebsite](#ApplicationWebsite)
+#### [ApplicationMeta](#ApplicationMeta)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enabled | boolean |  no  |  |
- | basepath | string |  no  |  |
+ | name | string? |  yes  | Indicates the name of application meta |
+ | value | string? |  yes  | Value related to application meta name |
+ 
 
 ---
 
-
- 
- 
- #### [ApplicationCors](#ApplicationCors)
+#### [ApplicationRedirections](#ApplicationRedirections)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | domains | [string] |  no  |  |
+ | redirect_from | string? |  yes  | Old domain URL of the sales channel |
+ | redirect_to | string? |  yes  | New domain URL of the sales channel. Users will be automatically redirected from old domain to new domain. |
+ | type | string? |  yes  | It shows domain redirection type. Permanent redirection is for long time period redirection, and temporary redirection for a short time period. |
+ 
 
 ---
 
-
- 
- 
- #### [ApplicationAuth](#ApplicationAuth)
+#### [ApplicationResponse](#ApplicationResponse)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | enabled | boolean |  no  |  |
+ | application | [Application](#Application)? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [ApplicationRedirections](#ApplicationRedirections)
+#### [ApplicationWebsite](#ApplicationWebsite)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | redirect_from | string |  no  |  |
- | redirect_to | string |  no  |  |
- | type | string |  no  |  |
+ | basepath | string? |  yes  | Base path for the current sales channel website |
+ | enabled | boolean? |  yes  | Shows whether sales channel website URL is enabled or not |
+ 
 
 ---
 
-
- 
- 
- #### [ApplicationMeta](#ApplicationMeta)
+#### [BadRequest](#BadRequest)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | string |  no  |  |
- | value | string |  no  |  |
+ | message | string? |  yes  | Failure message (in a string format) |
+ 
 
 ---
 
-
- 
- 
- #### [SecureUrl](#SecureUrl)
+#### [Currency](#Currency)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | secure_url | string |  no  |  |
+ | _id | string? |  yes  | The unique identifier (24-digit Mongo Object ID) of the current sales channel supported currency |
+ | code | string? |  yes  | 3-character currency code, e.g. INR, USD, EUR. |
+ | created_at | string? |  yes  | ISO 8601 timestamp of sales channel support currency creation |
+ | decimal_digits | number? |  yes  | Acceptable decimal limits for a given currency, e.g. 1.05$ means upto 2 decimal digits can be accepted as a valid value of a currency. |
+ | is_active | boolean? |  yes  | Shows currency is enabled or not in current sales channel |
+ | name | string? |  yes  | Name of the currency, e.g. Indian Rupee |
+ | symbol | string? |  yes  | Unique symbol for identifying the currency, e.g. ₹ |
+ | updated_at | string? |  yes  | ISO 8601 timestamp of sales channel support currency updation |
+ 
 
 ---
 
-
- 
- 
- #### [Application](#Application)
+#### [Domain](#Domain)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | website | [ApplicationWebsite](#ApplicationWebsite) |  no  |  |
- | cors | [ApplicationCors](#ApplicationCors) |  no  |  |
- | auth | [ApplicationAuth](#ApplicationAuth) |  no  |  |
- | description | string |  no  |  |
- | channel_type | string |  no  |  |
- | cache_ttl | number |  no  |  |
- | is_internal | boolean |  no  |  |
- | is_active | boolean |  no  |  |
- | _id | string |  no  |  |
- | name | string |  no  |  |
- | owner | string |  no  |  |
- | company_id | number |  no  |  |
- | token | string |  no  |  |
- | redirections | [[ApplicationRedirections](#ApplicationRedirections)] |  no  |  |
- | meta | [[ApplicationMeta](#ApplicationMeta)] |  no  |  |
- | created_at | string |  no  |  |
- | updated_at | string |  no  |  |
- | __v | number |  no  |  |
- | banner | [SecureUrl](#SecureUrl) |  no  |  |
- | logo | [SecureUrl](#SecureUrl) |  no  |  |
- | favicon | [SecureUrl](#SecureUrl) |  no  |  |
- | domains | [[Domain](#Domain)] |  no  |  |
- | app_type | string |  no  |  |
- | mobile_logo | [SecureUrl](#SecureUrl) |  no  |  |
- | domain | [Domain](#Domain) |  no  |  |
+ | _id | string? |  yes  | The unique identifier (24-digit Mongo Object ID) of the domain |
+ | is_predefined | boolean? |  yes  | Domain is hosting domain or not |
+ | is_primary | boolean? |  yes  | Indicates domain is primary or not. Primary domain is the default/main domain. |
+ | is_shortlink | boolean? |  yes  | Shortlink is present or not for the domain |
+ | name | string? |  yes  |  |
+ | verified | boolean? |  yes  | Indicates domain is verified or not. TXT and A records should propagate correctly. |
+ 
 
 ---
 
-
- 
- 
- #### [NotFound](#NotFound)
+#### [LocationCountry](#LocationCountry)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | string |  no  |  |
+ | __v | number? |  yes  |  |
+ | _id | string? |  yes  |  |
+ | capital | string? |  yes  |  |
+ | currency | string? |  yes  |  |
+ | default_currency | [LocationDefaultCurrency](#LocationDefaultCurrency)? |  yes  |  |
+ | default_language | [LocationDefaultLanguage](#LocationDefaultLanguage)? |  yes  |  |
+ | iso2 | string? |  yes  |  |
+ | iso3 | string? |  yes  |  |
+ | name | string? |  yes  |  |
+ | parent | string? |  yes  |  |
+ | phone_code | string? |  yes  |  |
+ | type | string? |  yes  |  |
+ | uid | number? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [BadRequest](#BadRequest)
+#### [LocationDefaultCurrency](#LocationDefaultCurrency)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | message | string |  no  | Failure message. |
+ | code | string? |  yes  |  |
+ | name | string? |  yes  |  |
+ | symbol | string? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [Page](#Page)
+#### [LocationDefaultLanguage](#LocationDefaultLanguage)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | type | string |  yes  |  |
- | size | number |  no  |  |
- | current | number |  no  |  |
- | has_next | boolean |  no  |  |
- | item_total | number |  no  |  |
- | next_id | string |  no  |  |
- | has_previous | boolean |  no  |  |
+ | code | string? |  yes  |  |
+ | name | string? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [LocationDefaultLanguage](#LocationDefaultLanguage)
+#### [Locations](#Locations)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | string |  no  |  |
- | code | string |  no  |  |
+ | items | [string]? |  yes  |  |
+ 
 
 ---
 
-
- 
- 
- #### [LocationDefaultCurrency](#LocationDefaultCurrency)
+#### [NotFound](#NotFound)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | name | string |  no  |  |
- | symbol | string |  no  |  |
- | code | string |  no  |  |
+ | message | string? |  yes  | Response message for not found |
+ 
 
 ---
 
-
- 
- 
- #### [LocationCountry](#LocationCountry)
+#### [Page](#Page)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | capital | string |  no  |  |
- | currency | string |  no  |  |
- | iso2 | string |  no  |  |
- | iso3 | string |  no  |  |
- | name | string |  no  |  |
- | parent | string |  no  |  |
- | phone_code | string |  no  |  |
- | type | string |  no  |  |
- | uid | number |  no  |  |
- | __v | number |  no  |  |
- | _id | string |  no  |  |
- | default_currency | [LocationDefaultCurrency](#LocationDefaultCurrency) |  no  |  |
- | default_language | [LocationDefaultLanguage](#LocationDefaultLanguage) |  no  |  |
+ | current | number? |  yes  | Current page number |
+ | has_next | boolean? |  yes  | Next page is present or not |
+ | has_previous | boolean? |  yes  | Previous page is present or not |
+ | item_total | number? |  yes  | Total number of items to retrieve |
+ | next_id | string? |  yes  | Next page ID |
+ | size | number? |  yes  | The number of items to retrieve in each page. Default value is 10. |
+ | type | string |  no  | Page type |
+ 
 
 ---
 
-
- 
- 
- #### [Locations](#Locations)
+#### [SecureUrl](#SecureUrl)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | items | [string] |  no  |  |
+ | secure_url | string? |  yes  | Hosted URL of the image |
+ 
 
 ---
 

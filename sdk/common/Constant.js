@@ -20,11 +20,10 @@ const AVAILABLE_PAGE_TYPE = {
   PAGE: "page",
   POLICY: "policy",
   PRODUCT: "product",
-  PRODUCT_REVIEWS: "product-reviews",
-  ADD_PRODUCT_REVIEW: "add-product-review",
   PRODUCT_REQUEST: "product-request",
   PRODUCTS: "products",
   PROFILE: "profile",
+  PROFILE_ORDER_SHIPMENT: "profile-order-shipment",
   PROFILE_BASIC: "profile-basic",
   PROFILE_COMPANY: "profile-company",
   PROFILE_EMAILS: "profile-emails",
@@ -45,6 +44,7 @@ const AVAILABLE_PAGE_TYPE = {
   REGISTER: "register",
   SHIPPING_POLICY: "shipping-policy",
   RETURN_POLICY: "return-policy",
+  ORDER_STATUS: "order-status",
 };
 
 Object.freeze(AVAILABLE_PAGE_TYPE);
@@ -188,26 +188,6 @@ const NAVIGATORS = {
       },
     ],
   },
-  "product-reviews": {
-    name: "Product Reviews",
-    link: "/product/:slug/reviews",
-    params: [
-      {
-        key: "slug",
-        required: true,
-      },
-    ],
-  },
-  "add-product-review": {
-    name: "Add Product review",
-    link: "/product/:slug/add-review",
-    params: [
-      {
-        key: "slug",
-        required: true,
-      },
-    ],
-  },
   "product-request": {
     name: "Product Request",
     link: "/product-request/",
@@ -219,6 +199,16 @@ const NAVIGATORS = {
   profile: {
     name: "Profile",
     link: "/profile",
+  },
+  "profile-order-shipment": {
+    name: "profile orders shipment",
+    link: "/profile/orders/shipment/:shipmentid",
+    params: [
+      {
+        key: "shipmentid",
+        required: true,
+      },
+    ],
   },
   "profile-basic": {
     name: "Basic Profile",
@@ -323,6 +313,10 @@ const NAVIGATORS = {
   "return-policy": {
     name: "Return policy",
     link: "/return-policy",
+  },
+  "order-status": {
+    name: "Order status",
+    link: "/cart/order-status",
   },
 };
 
